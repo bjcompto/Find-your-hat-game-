@@ -25,7 +25,7 @@ class Field {
     userDirections() {
         const userMove = prompt('Which direction would you like to move? ');
         //console.log(typeof userMove); 
-        console.log(`You want to where again? \n${userMove}  \nLet me see if that's possible lol`); 
+        console.log(`You want to move where again? \n${userMove}  \nLet me see if that's possible lol`); 
         this.userMovement(userMove);
         this.printBoard();
         this.holePresent();
