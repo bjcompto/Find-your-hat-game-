@@ -25,8 +25,8 @@ class Field {
     userDirections() {
         const userMove = prompt('Which direction would you like to move? ');
         //console.log(typeof userMove); 
-        console.log(`You want to where again? \n${userMove}.  \nLet me see if that's possible lol`); 
-        this.userMovement();
+        console.log(`You want to where again? \n${userMove}  \nLet me see if that's possible lol`); 
+        this.userMovement(userMove);
         this.printBoard();
         this.holePresent();
     }
@@ -43,7 +43,7 @@ class Field {
         }
     }
 
-   userMovement() {
+   userMovement(str) {
         if(this.userMove === 'right') {
             //move right 1 space; 
         } else if(this.userMove === 'left') {
