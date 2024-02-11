@@ -54,7 +54,7 @@ class Field {
             //move down 1 space; 
         } else {
             console.log('invalid entry.  You can move right, left, up or down.  Enter valid entry')
-            this.userDirections; 
+            this.userDirections(); 
         }
     }
 
