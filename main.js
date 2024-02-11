@@ -24,7 +24,9 @@ class Field {
 
     userDirections() {
         const userMove = prompt('Which direction would you like to move? ');
-        console.log(`You want to move: ${userMove}`); 
+        //console.log(typeof userMove); 
+        console.log(`You want to where again? \n${userMove}.  \nLet me see if that's possible lol`); 
+        this.userMovement();
         this.printBoard();
         this.holePresent();
     }
@@ -38,6 +40,21 @@ class Field {
                     break; 
                 }
             }
+        }
+    }
+
+   userMovement() {
+        if(this.userMove === 'right') {
+            //move right 1 space; 
+        } else if(this.userMove === 'left') {
+            //move left 1 space;
+        } else if (this.userMove === 'up') {
+            //move up 1 space;
+        } else if(this.userMove === 'down') {
+            //move down 1 space; 
+        } else {
+            console.log('invalid entry.  You can right, left, up or down.  Enter valid entry')
+            this.userDirections; 
         }
     }
 
