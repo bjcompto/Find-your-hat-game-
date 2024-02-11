@@ -44,13 +44,14 @@ class Field {
     }
 
    userMovement(str) {
-        if(this.userMove === 'right') {
-            //move right 1 space; 
-        } else if(this.userMove === 'left') {
+        if(str === 'right') {
+            //move right 1 space;
+            console.log('test for accepted arg'); 
+        } else if(str === 'left') {
             //move left 1 space;
-        } else if (this.userMove === 'up') {
+        } else if (str === 'up') {
             //move up 1 space;
-        } else if(this.userMove === 'down') {
+        } else if(str === 'down') {
             //move down 1 space; 
         } else {
             console.log('invalid entry.  You can move right, left, up or down.  Enter valid entry')
