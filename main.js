@@ -22,11 +22,16 @@ class Field {
         }, 1500);
     }
 
-    userDirections() {
+    userPrompt() {
         const userMove = prompt('Which direction would you like to move? ');
         //console.log(typeof userMove); 
         console.log(`You want to move where again? \n${userMove}  \nLet me see if that's possible lol`); 
-        this.userMovement(userMove);
+        return userMove; 
+    }
+
+    runGame() {
+        const userMove = this.userPrompt(); 
+        this.userMovement(userMove); 
         this.printBoard();
         this.holePresent();
     }
@@ -44,18 +49,22 @@ class Field {
     }
 
    userMovement(str) {
+        console.log('received user input:', str);
         if(str === 'right') {
             //move right 1 space;
-            console.log('test for accepted arg'); 
+            console.log('moving right'); 
         } else if(str === 'left') {
             //move left 1 space;
-        } else if (str === 'up') {
+            console.log('moving left');
+        } else if (str === 'up') { //************for some reason up is returning invalid entry instead of console logging 'moving up'; 
             //move up 1 space;
+            console.log('moving up');
         } else if(str === 'down') {
             //move down 1 space; 
+            console.log('moving down'); 
         } else {
             console.log('invalid entry.  You can move right, left, up or down.  Enter valid entry')
-            this.userDirections(); 
+            return; 
         }
     }
 
@@ -70,4 +79,4 @@ const gameOne = new Field([
 ])
 
 
-gameOne.userDirections(); 
+gameOne.runGame(); 
