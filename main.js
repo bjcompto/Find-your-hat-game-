@@ -10,32 +10,42 @@ class Field {
     constructor(gameField) {
         this.gameField = gameField; 
     }
-
+    //this does not actually reset game..work on last 
     newGame() {
         console.log(this.gameField); 
     }
-    
+    //setTimeout not good with for loop..learn more about why later
+    /**In order to use setTimeout in for loop have to pass callback i so that function will have access to the loop's iterator
+     * for example const myfunc = (i) => console.log(i); 
+     * for(let i = 0; i < arr.length; i++) {
+     *    setTimeout(() => doThing(i), 1500});
+     * }
+    */
     printBoard() {
-        setTimeout(() => {
-            let twoArrToStr = this.gameField.map(arr => arr.join('')).join('');
-            console.log(twoArrToStr); 
-        }, 1500);
+        let bdStr = this.gameField.map(arr => arr.join('')).join('');
+        console.log(bdStr); 
     }
 
     userPrompt() {
-        const userMove = prompt('Which direction would you like to move? ');
-        //console.log(typeof userMove); 
-        console.log(`You want to move where again? \n${userMove}  \nLet me see if that's possible lol`); 
+        const userMove = prompt('Which direction would you like to move? ').toLowerCase();
+        console.log(`You want to move where again?  \n${userMove}`);
         return userMove; 
     }
 
     runGame() {
-        const userMove = this.userPrompt(); 
-        this.userMovement(userMove); 
+        //may use plyer piece to anchor player undecided 
         this.printBoard();
-        this.holePresent();
+        //game loop 
+        for(let i = 0; i < this.gameField.length; i++) {
+            for(let j = 0; j < this.gameField[i].length; j++) {
+                const userMove = this.userPrompt();
+                //passing i n j to method 
+                this.userMovement(userMove); 
+                //this.holePresent();  
+            }
+        }
     }
-
+    //detects hole board and ends game if encountered..
     holePresent() {
         for(let i = 0; i < this.gameField.length; i++) {
             for(let j = 0; j < this.gameField[i].length; j++) {
@@ -43,34 +53,48 @@ class Field {
                     console.log('There is a hole here.')
                     this.newGame();
                     break; 
+                } else {
+                    //what to do if hole not presetn 
                 }
             }
         }
     }
-
+    
    userMovement(str) {
-        console.log('received user input:', str);
+        
         if(str === 'right') {
-            //move right 1 space;
-            console.log('moving right'); 
-        } else if(str === 'left') {
-            //move left 1 space;
-            console.log('moving left');
-        } else if (str === 'up') { //************for some reason up is returning invalid entry instead of console logging 'moving up'; 
-            //move up 1 space;
-            console.log('moving up');
-        } else if(str === 'down') {
-            //move down 1 space; 
-            console.log('moving down'); 
+            console.log('Moving to the right');
+            for(let i = 0; i < this.gameField.length; i++) {
+                for(let j = 0; j < this.gameField[i].length - 1; j++) {
+                    this.gameField[i][j + 1] = pathCharacter; 
+                    break; 
+                }  
+            }
         } else {
-            console.log('invalid entry.  You can move right, left, up or down.  Enter valid entry')
-            return; 
-        }
+            console.log('invalid entry\n'); 
+        }  
+        
+        this.printBoard();
+       
+            /*
+            if(str === 'right') {
+            //move r + 1;
+                console.log('Moving piece right');
+                this.gameField[i][j + 1] = pathCharacter; 
+                //return 
+            } else {
+                console.log('invalid entry\n');
+                //this.printBoard();
+            } this.printBoard();
+            return
+            */       
     }
 
+    plyer() {
+        this.gameField[0][0] = pathCharacter; 
+        //console.log(this.gameField); 
+    }
 }
-
-
 
 const gameOne = new Field([
     [pathCharacter, fieldCharacter, fieldCharacter],
@@ -78,5 +102,6 @@ const gameOne = new Field([
     [fieldCharacter, hat, fieldCharacter]
 ])
 
-
 gameOne.runGame(); 
+//gameOne.printBoard();
+
